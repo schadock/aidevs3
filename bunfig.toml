@@ -1,0 +1,6 @@
+[dependencies]
+express = "latest"
+node-fetch = "latest"
+
+[scripts]
+start = "bun run --watch app.ts" 
