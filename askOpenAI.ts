@@ -2,13 +2,13 @@ import OpenAI from 'openai';
 
 const client = new OpenAI();
 
-export async function askQuestionToModel(question: string): Promise<string> {
+export async function askQuestionToModel(instruction: string, input: string): Promise<string> {
   try {
 
     const response = await client.responses.create({
       model: "gpt-4.1-nano",
-      instructions: "answer the question in shortest way possible",
-      input: question
+      instructions: instruction,
+      input: input
     });
     return response.output_text;
 
