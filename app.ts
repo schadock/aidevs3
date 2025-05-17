@@ -1,6 +1,9 @@
 import express from 'express';
 import fetch from 'node-fetch';
 import { askQuestionToModel } from './askOpenAI';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const targetUrl = 'https://xyz.ag3nts.org/';
 const app = express();
@@ -62,8 +65,8 @@ app.get('/run', async (req: express.Request, res: express.Response) => {
           console.log('Failed to visit secret page');
         }
 
-        res.send(flag);
-        // res.send(secretPageHtml);
+        // res.send(flag);
+        res.send(secretPageHtml);
       } else {
         console.log('POST request failed');
         res.status(500).send('Failed to retrieve secret page URL');

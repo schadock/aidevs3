@@ -9,9 +9,10 @@
     "typescript": "^5"
   },
   "scripts": {
-    "start": "bun run --watch app.ts"
+    "start": "bun run --watch ./app.ts"
   },
   "dependencies": {
+    "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "node-fetch": "^3.3.2",
     "openai": "^4.99.0"
