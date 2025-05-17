@@ -1,5 +1,6 @@
 import express from 'express';
 import fetch from 'node-fetch';
+import { askQuestionToModel } from './askOpenAI';
 
 const app = express();
 const port = 3000;
@@ -12,13 +13,16 @@ app.get('/run', async (req: express.Request, res: express.Response) => {
     if (questionMatch && questionMatch[1]) {
       const question = questionMatch[1].trim();
       console.log('Question:', question);
+      const answer = await askQuestionToModel(question);
+      console.log('Answer:', answer);
       res.send(question);
     } else {
       console.log('Question not found');
       res.status(404).send('Question not found');
     }
   } catch (error) {
-    res.status(500).send('Error fetching the page');
+    console.error('Error:', error);
+    res.status(500).send('Error asking question to model');
   }
 });
 
