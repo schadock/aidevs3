@@ -1,9 +1,15 @@
 import fetch from 'node-fetch';
+import { ChatWithRobot } from './chatWithRobot';
 
-const url = 'https://xyz.ag3nts.org/verify';
+const robotChat = new ChatWithRobot();
 
 async function mission() {
   console.log('Mission started...');
+  try {
+    await robotChat.conversation();
+  } catch (error) {
+    console.error('Error:', error);
+  }
 }
 
 mission(); 

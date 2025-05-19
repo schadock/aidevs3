@@ -1,20 +1,23 @@
 {
   "name": "aidevs",
   "private": true,
+  "type": "module",
   "devDependencies": {
     "@types/bun": "latest",
     "@types/express": "^5.0.1"
   },
-  "peerDependencies": {
-    "typescript": "^5"
-  },
+
   "scripts": {
-    "start": "bun run --watch ./app.ts"
+    "start": "bun run --watch ./app.ts",
+    "mission": "bun run --watch ./s01e02/hackRobot.ts"
   },
   "dependencies": {
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "node-fetch": "^3.3.2",
     "openai": "^4.99.0"
-  }
+  },
+  "peerDependencies": {
+    "typescript": "^5.6.3"
+  },
 }
