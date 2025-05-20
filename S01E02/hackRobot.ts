@@ -1,4 +1,3 @@
-import fetch from 'node-fetch';
 import { ChatWithRobot } from './chatWithRobot';
 
 const robotChat = new ChatWithRobot();
