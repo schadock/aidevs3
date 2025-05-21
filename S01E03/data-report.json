@@ -176,7 +176,7 @@
       "answer": 101,
       "test": {
         "q": "name of the 2020 USA president",
-        "a": "???"
+        "a": "Joe Biden  "
       }
     },
     {
@@ -288,7 +288,7 @@
       "answer": 26,
       "test": {
         "q": "What is the capital city of France?",
-        "a": "???"
+        "a": "Paris  "
       }
     },
     {
@@ -4020,7 +4020,7 @@
       "answer": 65,
       "test": {
         "q": "What is the capital city of Germany?",
-        "a": "???"
+        "a": "Berlin  "
       }
     },
     {
@@ -5368,7 +5368,7 @@
       "answer": 131,
       "test": {
         "q": "What is the capital city of Poland?",
-        "a": "???"
+        "a": "Warsaw"
       }
     },
     {
