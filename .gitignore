@@ -33,5 +33,6 @@ report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
 # Finder (MacOS) folder config
 .DS_Store
 
-# S01E03
-data-S01E03.json
+# Data files
+data-*.json
+data-*.txt
