@@ -100,14 +100,42 @@ async function unpackZipFile() {
     }
 }
 
-async function processAndSendCensoredText() {
+async function transcript(audioBuffer) {
+    if (!audioBuffer) {
+        throw new Error('No audio file buffer provided.');
+    }
+    try {
+        const transcription = await openaiService.transcribe(audioBuffer);
+        return transcription;
+    } catch (error) {
+        console.error('Transcription error:', error);
+        throw new Error('An error occurred during transcription');
+    }
+}
+
+async function processInterrogation() {
     try {
         // Download and get the content
         const startTimeDownload = performance.now();
-        const originalText = await downloadAndSaveFile();
+        await downloadAndSaveFile(); // Changed to await as the function now handles saving and unpacking
         const endTimeDownload = performance.now();
         console.log(`downloadAndSaveFile execution time: ${(endTimeDownload - startTimeDownload).toFixed(2)} ms`);
-        
+
+        // Get the list of extracted files
+        const extractedPath = path.join(__dirname, 'extracted');
+        const files = fs.readdirSync(extractedPath);
+
+        if (files.length > 0) {
+            const firstFile = files[0];
+            const filePath = path.join(extractedPath, firstFile);
+            const audioBuffer = fs.readFileSync(filePath);
+            console.log(`Loading and transcribing the first file: ${firstFile}`);
+            const transcriptionResult = await transcript(audioBuffer);
+            console.log('Transcription for', firstFile, ':', transcriptionResult);
+        } else {
+            console.log('No files found in the extracted directory.');
+        }
+
     } catch (error) {
         console.error('Error:', error.message);
         throw error;
@@ -115,4 +143,4 @@ async function processAndSendCensoredText() {
 }
 
 // Execute the main function
-await processAndSendCensoredText(); 
+await processInterrogation(); 
