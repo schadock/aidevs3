@@ -11,6 +11,7 @@
     "mission": "bun run --watch ./s01e02/hackRobot.ts"
   },
   "dependencies": {
+    "adm-zip": "^0.5.16",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "node-fetch": "^3.3.2",
