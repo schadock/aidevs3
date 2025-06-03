@@ -11,9 +11,12 @@
     "mission": "bun run --watch ./s01e02/hackRobot.ts"
   },
   "dependencies": {
+    "@microsoft/tiktokenizer": "^1.0.10",
     "adm-zip": "^0.5.16",
     "dotenv": "^16.5.0",
+    "elevenlabs": "^1.59.0",
     "express": "^5.1.0",
+    "groq-sdk": "^0.23.0",
     "node-fetch": "^3.3.2",
     "openai": "^4.99.0"
   },
