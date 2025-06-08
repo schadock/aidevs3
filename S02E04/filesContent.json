@@ -1,0 +1,22 @@
+[
+  {
+    "name": "2024-11-12_report-14.png",
+    "content": "REPAIR NOTE\n\nFROM: Repair department\n\nGodzina 15:45. Zakończono aktualizację systemu komunikacji jednostek mobilnych. Dodano możliwość dynamicznego przydzielania kanałów w zależności od obciążenia oraz zaimplementowano protokół szyfrowania QII dla bezpieczniejszej wymiany danych. Test komunikacji między jednostkami wykazał pełną kompatybilność z nowym systemem. Monitorowanie aktywne w trybie bieżącym.\n\nAPPROVED BY Joseph N."
+  },
+  {
+    "name": "2024-11-12_report-17.png",
+    "content": "REPAIR NOTE  \nFROM: Repair department  \n\nGodzina 09:20. Przeprowadzono procedurę wymiany przestarzałych ogniw w jednostkach mobilnych. Dotychczasowe ogniwa wykazywały obniżoną wydajność, wpływającą na zdolność operacyjną jednostek w dłuższych trasach patrolowych. Nowe ogniwa zostały zainstalowane zgodnie z wytycznymi technicznymi, a czas pracy jednostek uległ zwiększeniu o 15%. Monitorowanie w toku.  \n\nAPPROVED BY Joseph N."
+  },
+  {
+    "name": "2024-11-12_report-15.png",
+    "content": "REPAIR NOTE\n\nFROM: Repair department\n\nGodzina 11:50. W czujniku ruchu wykryto usterkę spowodowaną zwarciem kabli. Przyczyną była mała mysz, która dostała się między przewody, powodując chwilowe przerwy w działaniu sensorów. Odłączono zasilanie, usunięto ciało obce i zabezpieczono osłony kabli przed dalszymi uszkodzeniami. Czujnik ponownie skalibrowany i sprawdzony pod kątem poprawności działania.\n\nAPPROVED BY Joseph N."
+  },
+  {
+    "name": "2024-11-12_report-16.png",
+    "content": "REPAIR NOTE\n\nFROM: Repair department\n\nGodzina 13:30. Przeprowadzono aktualizację modułu AI analizującego wzorce ruchu. Wprowadzono dodatkowe algorytmy umożliwiające szybsze przetwarzanie i bardziej precyzyjną analizę zachowań niepożądanych. Aktualizacja zakończona sukcesem, wydajność systemu wzrosła o 18%, co potwierdzają pierwsze testy operacyjne. Algorytmy działają w pełnym zakresie\n\nAPPROVED BY Joseph N."
+  },
+  {
+    "name": "2024-11-12_report-13.png",
+    "content": "REPAIR NOTE\n\nFROM: Repair department\n\nGodzina 08:15. Rozpoczęto naprawę anteny nadawczej w sektorze komunikacyjnym. Uszkodzenie powstało wskutek długotrwałej ekspozycji na warunki atmosferyczne, co osłabiło sygnał przesyłowy. Wymieniono główny element przekaźnika oraz dokręcono panel stabilizacyjny. Test przesyłu sygnału zakończony pozytywnie. Antena działa zgodnie ze specyfikacją.\n\nAPPROVED BY Joseph N."
+  }
+]
