@@ -86,11 +86,6 @@ async function readMp3File(filePath) {
 
   if (transcription) {
     logMsg(`Transcription for ${fileName} completed in ${(endTimeTranscription - startTimeTranscription).toFixed(2)} ms.`);
-    const messages = [{ role: "user", content: transcription }];
-    const tokenCount = await openaiService.countTokens(messages, 'gpt-4o');
-    logMsg(`Token count for transcription: ${tokenCount}`);
-
-    logMsg(`Saved transcription for ${fileName} to testimonies.json.`);
     return transcription;
   }
   return null;
@@ -99,9 +94,6 @@ async function readMp3File(filePath) {
 async function reviewFiles() {
   try {
     const entries = await fs.readdir(archivePath, { withFileTypes: true });
-
-    let pngFiles = entries.filter(entry => entry.name.endsWith('.png')).slice(0, 1);
-    let mp3Files = entries.filter(entry => entry.name.endsWith('.mp3')).slice(0, 1);
 
     let existingFilesContent = [];
     const outputPath = path.join(__dirname, 'filesContent.json');
@@ -120,10 +112,10 @@ async function reviewFiles() {
     const filesContentPromises = entries.map(async (entry) => {
       const entryPath = path.join(archivePath, entry.name);
 
-      // Check if the file already exists in filesContent.json by name
+      // Check if the file already exists in filesContent.json by name and has a category
       const existingContent = existingFilesContent.find(item => item.name === entry.name);
-      if (existingContent) {
-        logMsg(`Skipping already processed file: ${entry.name}`);
+      if (existingContent && existingContent.category) {
+        logMsg(`Skipping already processed and categorized file: ${entry.name}`);
         return existingContent;
       }
 
@@ -146,14 +138,21 @@ async function reviewFiles() {
             case '.png':
               const pngContent = await readPngFile(entryPath);
               logMsg(`Processed PNG file: ${entry.name}`);
-              return { name: entry.name, content: pngContent };
+              const pngCategory = await analyzeContent(entry.name, pngContent, null, null);
+              return { name: entry.name, content: pngContent, category: pngCategory };
             case '.mp3':
               const mp3Content = await readMp3File(entryPath);
               if (mp3Content) {
+                const mp3Category = await analyzeContent(entry.name, mp3Content, null, null);
                 logMsg(`Processed MP3 file: ${entry.name}`);
-                return { name: entry.name, content: mp3Content };
+                return { name: entry.name, content: mp3Content, category: mp3Category };
               }
               return null;
+            case '.txt':
+              const txtContent = await fs.readFile(entryPath, 'utf8');  
+              const txtCategory = await analyzeContent(entry.name, txtContent, null, null);
+              logMsg(`Processed txt file: ${entry.name}`);
+              return { name: entry.name, content: txtContent, category: txtCategory };
             default:
               logMsg(`Skipping unsupported file type: ${entryPath}`);
               return null;
@@ -176,29 +175,128 @@ async function reviewFiles() {
     await fs.writeFile(outputPath, JSON.stringify(combinedFilesContent, null, 2));
     logMsg("filesContent.json updated successfully.");
 
+    const anwser = {
+      people: [],
+      hardware: []
+    }
+
+    // Analyze the content of filesContent.json
+    for (const fileItem of combinedFilesContent) {
+      if (fileItem.content) {
+        let category;
+        if (fileItem.category) {
+          logMsg(`Using existing category for "${fileItem.name}": ${fileItem.category}`);
+          category = fileItem.category;
+        } else {
+          logMsg(`Analyzing content from "${fileItem.name}" ...`);
+          category = await analyzeContent(fileItem.name, fileItem.content, null, null);
+          logMsg(`Analysis for ${fileItem.name}: ${category}`);
+        }
+        
+        if (category === 'ludzie') {
+          anwser.people.push(fileItem.name);
+        } else if (category === 'hardware') {
+          anwser.hardware.push(fileItem.name);
+        }
+      }
+    }
+
+    anwser.people.sort();
+    anwser.hardware.sort();
+
+    console.log("Final categorized files:", anwser);
+
+    await sendReport(anwser);
+
   } catch (err) {
     console.error("Error during file review:", err);
   }
 }
 
-async function extractInformation(title, text, extractionType, description) {
+async function analyzeContent(title, text, extractionType, description) {
   const extractionMessage = {
-    content: `Extract ${extractionType}: ${description} from user message under the context of "${title}". 
-        Transform the content into clear, structured yet simple bullet points without formatting except links and images. 
+    content: `Jesteś systemem analizy treści plików tekstowych (.txt).
 
-        Format link like so: - name: brief description with images and links if the original message contains them.
-        
-        Keep full accuracy of the original message.`,
+      Twoim zadaniem jest:
+      1. Przeczytaj zawartość tekstu i przypisz go do jednej z poniższych kategorii (lub odrzuć, jeśli nie pasuje do żadnej):
+
+      — LUDZIE:
+      Zawiera informacje o schwytanych osobach lub śladach ich obecności.
+      Przykłady:
+      - "Widziałem kogoś, kto uciekał w stronę wzgórza."
+      - "Znaleziono zużytą szczoteczkę do zębów i ślady stóp."
+
+      — HARDWARE:
+      Zawiera opisy usterek sprzętowych (hardware), np. uszkodzonych robotów, czujników, mechanicznych elementów.
+      Przykłady:
+      - "Leżał tam zepsuty dron, z oderwanym ramieniem."
+      - "Kamera obracała się w kółko, jakby miała uszkodzony przegub."
+
+      — POMIŃ:
+      - informacje o brygadzie
+      - personalne rozmowy strażników
+      - "Nie mogliśmy znaleźć nikogo"
+      - Jeśli tekst nie zawiera nic na temat ludzi ani sprzętowych usterek – pomiń go. Nie twórz nowych kategorii. Return "skip".
+
+      2. ZANIM zdecydujesz, pomyśl na głos.
+      - Podaj krótkie uzasadnienie: dlaczego plik pasuje do danej kategorii (albo dlaczego nie pasuje do żadnej).
+      - Następnie podaj wynik w formacie:
+        - KATEGORIA: Ludzie
+        - KATEGORIA: Hardware
+        - KATEGORIA: Pomiń
+
+      Zacznij od analizy zawartości.
+
+      ODPOWIEDŹ ZWRÓĆ W TAGACH w lowercase: <category>KATEGORIA</category>
+    `,
     role: 'system'
   };
 
   const userMessage = {
-    content: `Here's the articles you need to extract information from: ${text}`,
-    role: 'user'
+    role: 'user',
+    content: text
   };
 
-  const response = await openaiService.completion([extractionMessage, userMessage], 'gpt-4o', false);
-  return response.choices[0].message.content || '';
+  const response = await openaiService.completion([extractionMessage, userMessage], 'gpt-4.1-mini', false);
+  const fullContent = response.choices[0].message.content || '';
+  
+  const resultMatch = fullContent.match(/<category>(.*?)<\/category>/s);
+  if (resultMatch && resultMatch[1]) {
+    return resultMatch[1].trim();
+  } else {
+    return fullContent; // Return full content if tags are not found
+  }
+}
+
+async function sendReport(anwser) {
+  // Prepare the payload
+  const payload = {
+    task: "kategorie",
+    apikey: process.env.CENTRALA_KEY,
+    answer: {
+      people: anwser.people,
+      hardware: anwser.hardware
+    }
+  };
+
+  // Send to the API
+  const response = await fetch('https://c3ntrala.ag3nts.org/report', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8'
+    },
+    body: JSON.stringify(payload)
+  });
+
+  const responseData = await response.json();
+  console.log('Response:', responseData);
+
+  if (responseData.code === 0 && responseData.message) {
+    const match = responseData.message.match(/FLG:{{FLG:(.*?)}}/);
+    if (match && match[1]) {
+      console.log('Extracted FLG value:', match[1]);
+    }
+  }
 }
 
 // Call the function to start the review
