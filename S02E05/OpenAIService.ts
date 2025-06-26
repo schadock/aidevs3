@@ -41,21 +41,26 @@ export class OpenAIService {
     return tokens.length;
   }
 
-  async completion(
+  async completion(config: {
     messages: ChatCompletionMessageParam[],
-    model: string = "gpt-4",
-    stream: boolean = false,
-    jsonMode: boolean = false,
-    maxTokens: number = 1024
-  ): Promise<OpenAI.Chat.Completions.ChatCompletion | AsyncIterable<OpenAI.Chat.Completions.ChatCompletionChunk>> {
+    model?: string,
+    stream?: boolean,
+    temperature?: number,
+    jsonMode?: boolean,
+    maxTokens?: number
+  }): Promise<OpenAI.Chat.Completions.ChatCompletion | AsyncIterable<OpenAI.Chat.Completions.ChatCompletionChunk>> {
+    const { messages, model = "o1-mini", stream = false, jsonMode = false, maxTokens = 14000, temperature = 0 } = config;
     try {
-      const chatCompletion = await this.openai.chat.completions.create({
+      const completionOptions: OpenAI.Chat.Completions.ChatCompletionCreateParams = {
         messages,
         model,
         stream,
+        temperature,
         max_tokens: maxTokens,
         response_format: jsonMode ? { type: "json_object" } : { type: "text" }
-      });
+      };
+
+      const chatCompletion = await this.openai.chat.completions.create(completionOptions);
       
       if (stream) {
         return chatCompletion as AsyncIterable<OpenAI.Chat.Completions.ChatCompletionChunk>;

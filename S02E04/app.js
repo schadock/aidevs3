@@ -124,8 +124,8 @@ async function reviewFiles() {
           console.log(`Skipping directory: ${entryPath}`);
         }
         return null;
-      } 
-      
+      }
+
       if (entry.isFile()) {
         if (entry.name === 'weapons_tests.zip') {
           console.log(`Skipping file: ${entryPath}`);
