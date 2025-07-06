@@ -2,6 +2,14 @@ import { promises as fs, createWriteStream } from 'fs';
 import https from 'https';
 import { exec } from 'child_process';
 import { promisify } from 'util';
+import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config({ path: path.join(__dirname, '../.env') });
 
 const execAsync = promisify(exec);
 
@@ -65,6 +73,24 @@ const unzipFile = async (zipPath, destDir) => {
     }
 };
 
+const unzipFileWithPassword = async (zipPath, destDir, password) => {
+    console.log(`Unzipping ${zipPath} to ${destDir} with password...`);
+
+    if (!password) {
+        console.error('Password is required but not provided. Set WEAPONS_TEST_PASS environment variable.');
+        throw new Error('Password is required but not provided');
+    }
+
+    try {
+        // Use -P flag to provide password non-interactively
+        await execAsync(`unzip -o -P "${password}" "${zipPath}" -d "${destDir}"`, { timeout: 30000 });
+        return console.log('Unzip with password successful.');
+    } catch (error) {
+        console.error('Error unzipping file with password:', error);
+        throw error;
+    }
+};
+
 const main = async () => {
   try {
     console.log('Checking file status...');
@@ -86,7 +112,7 @@ const main = async () => {
       console.log('Downloading file...');
       await downloadFile(fileUrl, zipFileName);
       console.log('Download complete.');
-      
+
       console.log(`Removing old directory ${extractDir} if it exists...`);
       await fs.rm(extractDir, { recursive: true, force: true });
 
@@ -104,13 +130,21 @@ const main = async () => {
             }
         }
     }
-    
+
     console.log('Script finished successfully.');
 
   } catch (error) {
     console.error('An error occurred:', error.message);
   }
 };
+const weaponsTestPath = '../data-from-c3ntral/archive/weapons_tests.zip';
+const weaponsTestDestDir = '../data-from-c3ntral/archive/weapons_tests';
+const weaponsTestPassword = process.env.WEAPONS_TEST_PASS;
 
+const unzipWeponsTest = async () => {
+  await unzipFileWithPassword(weaponsTestPath, weaponsTestDestDir, weaponsTestPassword);
+};
+
+// unzipWeponsTest();
 main();
 

@@ -38,6 +38,7 @@ data-*.json
 data-*.txt
 
 *.zip
+!data-from-c3ntral/archive/weapons_tests.zip
 
 *.m4a
 
