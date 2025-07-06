@@ -1,0 +1,136 @@
+[
+  {
+    "osoby": [
+      "technicy",
+      "inżynierowie - posiadają specjalne identyfikatory i odzież ochronną"
+    ],
+    "lokacje": [
+      "Sektor C w fabryce"
+    ],
+    "zdarzenie": "Przeprowadzanie testów nowoczesnej broni w Sektorze C, chronionym i monitorowanym przez zaawansowane systemy bezpieczeństwa",
+    "obiekty": [
+      "nowoczesna broń",
+      "systemy bezpieczeństwa",
+      "stanowiska testowe",
+      "osłony przeciwodłamkowe"
+    ]
+  },
+  {
+    "osoby": [],
+    "lokacje": [
+      "sektor A",
+      "fabryka"
+    ],
+    "zdarzenie": "Opis procesu montażu robotów przemysłowych i wojskowych w sektorze A, z podziałem na strefy, zabezpieczenia i nadzór AI",
+    "obiekty": [
+      "roboty przemysłowe",
+      "jednostki wojskowe",
+      "linie produkcyjne",
+      "egzoszkielety",
+      "system monitoringu",
+      "systemy biometryczne"
+    ]
+  },
+  {
+    "osoby": [
+      "zespół inżynierów i naukowców"
+    ],
+    "lokacje": [
+      "sektor B"
+    ],
+    "zdarzenie": "Prace badawczo-rozwojowe nad nowoczesnymi ogniwami bateryjnymi w sektorze B, obejmujące testy, diagnostykę i rozwój technologii dla przemysłu i wojska",
+    "obiekty": [
+      "prototypy ogniw",
+      "laboratoria",
+      "zaawansowane aparaty diagnostyczne",
+      "komory zabezpieczające",
+      "algorytmy sztucznej inteligencji"
+    ]
+  },
+  {
+    "osoby": [
+      "Aleksander Ragowski - nauczyciel języka angielskiego, krytyk reżimu robotów, programista w języku Java"
+    ],
+    "lokacje": [
+      "Szkoła Podstawowa nr 9 w Grudziądzu",
+      "obrzeża większych miast",
+      "strefy niedostępne dla patroli automatycznych"
+    ],
+    "zdarzenie": "Aleksander Ragowski, nauczyciel i krytyk reżimu robotów, ukrywa się po ucieczce z aresztu, planując przełamać zabezpieczenia systemów rządowych",
+    "obiekty": [
+      "systemy rządowe",
+      "programowanie w języku Java"
+    ]
+  },
+  {
+    "osoby": [
+      "Barbara Zawadzka - specjalistka od frontend developmentu, biegła w JavaScript i Python, ekspertka od sztucznej inteligencji, działaczka ruchu oporu, była związana z Aleksandrem Ragorskim"
+    ],
+    "lokacje": [
+      "ul. Bracka w Krakowie"
+    ],
+    "zdarzenie": "Barbara Zawadzka, była specjalistka IT i działaczka oporu, zaangażowana w działania sabotażowe przeciwko reżimowi, ostatnio widziana w okolicach miast o ograniczonym dostępie",
+    "obiekty": [
+      "sztuczna inteligencja",
+      "bazy wektorowe",
+      "koktajle Mołotowa",
+      "broń palna"
+    ]
+  },
+  {
+    "osoby": [
+      "Azazel - tajemnicza postać, posiadająca zdolności teleportacji, związana z ruchem oporu i władzami",
+      "Zygfryd - osoba o rozległych wpływach, prawdopodobny mocodaw Azazela"
+    ],
+    "lokacje": [
+      "strategiczne fabryki zarządzane przez roboty"
+    ],
+    "zdarzenie": "Azazel, tajemnicza postać z nadprzyrodzonymi zdolnościami, pojawia się w fabrykach robotów, współpracując z Zygfrydem, mimo prób jego schwytania",
+    "obiekty": [
+      "technologie przyszłościowe",
+      "systemy operacyjne robotów",
+      "maszyny przemysłowe"
+    ]
+  },
+  {
+    "osoby": [
+      "Rafał Bomba - laborant, współpracownik profesora Andrzeja Maja",
+      "profesor Andrzej Maj"
+    ],
+    "lokacje": [
+      "zaawansowany ośrodek badawczy",
+      "ośrodek dla obłąkanych"
+    ],
+    "zdarzenie": "Rafał Bomba zniknął, później odnaleziony pod fałszywym nazwiskiem, wykazując objawy zaburzeń psychicznych i obsesje na temat przyszłych technologii",
+    "obiekty": [
+      "urządzenia do modyfikacji pamięci",
+      "eksperymenty na podróżach w czasie, sztucznej inteligencji i nanotechnologii"
+    ]
+  },
+  {
+    "osoby": [
+      "Adam Gospodarczyk - kluczowa postać w ruchu oporu, specjalista od programowania i rekrutacji, szkoleniowiec agentów"
+    ],
+    "lokacje": [],
+    "zdarzenie": "Adam Gospodarczyk, tajny rewolucjonista i szkoleniowiec agentów, przygotowuje ich do walki z reżimem sztucznej inteligencji, operując w cieniu i unikając schwytania",
+    "obiekty": [
+      "kodowanie",
+      "technologie przyszłości",
+      "systemy AI",
+      "metody bypassowania zabezpieczeń"
+    ]
+  },
+  {
+    "osoby": [],
+    "lokacje": [
+      "Sektor D"
+    ],
+    "zdarzenie": "Sektor D został wyłączony z produkcji i pełni funkcję tymczasowego magazynu w fabryce",
+    "obiekty": [
+      "materiały",
+      "komponenty",
+      "części zamienne",
+      "surowce"
+    ]
+  }
+]
