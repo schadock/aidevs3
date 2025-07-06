@@ -40,3 +40,6 @@ data-*.txt
 *.zip
 
 *.m4a
+
+# Qdrant data storage
+qdrant-db/qdrant_storage/
