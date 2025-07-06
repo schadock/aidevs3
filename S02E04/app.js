@@ -4,9 +4,9 @@ import fs from 'fs/promises';
 import path from 'path';
 
 dotenv.config({ path: path.join(__dirname, '../.env') });
-  
+
 const openaiService = new OpenAIService();
-const archivePath = './archive';
+const archivePath = '../data-from-c3ntral/archive';
 
 function logMsg(message) {
   console.log(`[LOG] ${message}`);

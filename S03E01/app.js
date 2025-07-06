@@ -6,7 +6,7 @@ import path from 'path';
 dotenv.config({ path: path.join(__dirname, '../.env') });
 
 const openaiService = new OpenAIService();
-const factsPath = './archive/facts';
+const factsPath = '../data-from-c3ntral/archive/facts';
 
 async function processFactFiles() {
   try {
@@ -224,7 +224,7 @@ async function processReport(report) {
 async function analyzeReports() {
   try {
     console.log('Analyze Reports...');
-    const reportsPath = './archive';
+    const reportsPath = '../data-from-c3ntral/archive';
 
     // Get all files in the directory
     const files = await fs.readdir(reportsPath);
