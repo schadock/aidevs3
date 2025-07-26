@@ -20,6 +20,7 @@
     "elevenlabs": "^1.59.0",
     "express": "^5.1.0",
     "groq-sdk": "^0.23.0",
+    "neo4j-driver": "^5.28.1",
     "node-fetch": "^3.3.2",
     "openai": "^4.99.0",
     "turndown": "^7.1.3",
