@@ -3,7 +3,7 @@ import path from 'path';
 import fs from 'fs/promises';
 import { fileURLToPath } from 'url';
 
-import { OpenAIService } from './OpenAIService.ts';
+import { OpenAIService } from '../helpers/OpenAIService.ts';
 import { fetchAndSaveArticles } from './fetchArticles.js';
 
 const __filename = fileURLToPath(import.meta.url);

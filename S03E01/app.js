@@ -1,4 +1,4 @@
-import { OpenAIService } from './OpenAIService.ts';
+import { OpenAIService } from '../helpers/OpenAIService.ts';
 import dotenv from 'dotenv';
 import fs from 'fs/promises';
 import path from 'path';
